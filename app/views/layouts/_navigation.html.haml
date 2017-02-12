@@ -1,0 +1,31 @@
+%nav.navbar.navbar-toggleable-md.navbar-light
+	.container
+		%button.navbar-toggler.navbar-toggler-right{"aria-controls" => "navbarTogglerDemo02", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarTogglerDemo02", "data-toggle" => "collapse", :type => "button"}
+			%span.navbar-toggler-icon
+		%a.navbar-brand{:href => "/"}
+			%i.fa.fa-instagram.fa-2x
+			%span Instagram
+
+		-if user_signed_in?
+			#navbarTogglerDemo02.collapse.navbar-collapse
+
+				%form.form-inline.form-center
+					%input.form-control.mr-sm-2{:placeholder => "Search", :type => "text"}/
+
+				%ul.navbar-nav
+					%li.nav-item
+						%a.nav-link{:href => "#"}
+							%i.fa.fa-compass
+							%span.sr-only (current)
+					%li.nav-item
+						%a.nav-link{:href => "#"}
+							%i.fa.fa-heart-o
+					%li.nav-item
+						%a.nav-link{:href => "#"}
+							%i.fa.fa-user-o
+					%li.nav-item
+						=link_to new_post_path, class:"nav-link" do
+							%i.fa.fa-plus-square
+					%li.nav-item
+						=link_to destroy_user_session_path, method: :delete, class:"nav-link" do
+							%i.fa.fa-undo

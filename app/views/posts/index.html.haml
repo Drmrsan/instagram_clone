@@ -1,0 +1,25 @@
+.container
+
+	.row
+		.col-md-6.offset-md-3
+			-# .card.card-outline-secondary.mb-3.text-center
+			-# 	.card-block.new-post
+			-# 		%a{:href => "#"}
+			-# 			%span+
+			-# 			%p Add post
+			
+			-@posts.each do |post|
+				.card.post-card
+					.card-header
+						%span.post-username Username
+						%span.post-timestamp 1 day ago
+					%img{:src => "http://coolvectors.com/images/vect/2009/07/500x500.jpg", :alt => "", class:"card-img=top"}/
+					.card-footer
+						%p
+							=post.caption
+						%p tags: #tag, #something
+						%hr/
+						%form.form-inline
+							.input-group-addon
+								%a.fa.fa-heart-o{:href => "#"}
+							%input{:type => "text", placeholder: "Add a comment...", class:"form-control add-comment"}/
