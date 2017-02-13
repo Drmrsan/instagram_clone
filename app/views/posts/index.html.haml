@@ -11,15 +11,20 @@
 			-@posts.each do |post|
 				.card.post-card
 					.card-header
-						%span.post-username Username
-						%span.post-timestamp 1 day ago
-					%img{:src => "http://coolvectors.com/images/vect/2009/07/500x500.jpg", :alt => "", class:"card-img=top"}/
+						%span.post-username
+							=post.user.username
+						%span.post-timestamp
+							.small.mute created #{time_ago_in_words(post.created_at)} ago
+					=image_tag(post.image.url, class:"img-fluid") if post.image?
 					.card-footer
 						%p
 							=post.caption
 						%p tags: #tag, #something
+						=render post.comments
 						%hr/
 						%form.form-inline
 							.input-group-addon
 								%a.fa.fa-heart-o{:href => "#"}
-							%input{:type => "text", placeholder: "Add a comment...", class:"form-control add-comment"}/
+							=simple_form_for([post, post.comments.build]) do |f|
+								=f.input :content, class:"form-control add-comment", placeholder:"Add a comment", label:false
+								=f.submit

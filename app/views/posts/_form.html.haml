@@ -1,0 +1,7 @@
+=simple_form_for(@post, html:{multipart:true}) do |f|
+	=f.input :caption, placeholder:"Add caption...", class:"form-control"
+	=f.label :image, label:"Upload image"
+	=f.file_field :image, class:"form-control"
+	%br/
+	=f.input :remote_image_url, label:"or add image url...", placeholder:"http://..."
+	=f.submit class:"btn btn-secundary"
