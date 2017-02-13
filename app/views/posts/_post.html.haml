@@ -1,0 +1,19 @@
+.card.post-card
+	.card-header
+		%span.post-username
+			=post.user.username
+		%span.post-timestamp
+			.small.mute created #{time_ago_in_words(post.created_at)} ago
+	=image_tag(post.image.url, class:"img-fluid") if post.image?
+	.card-footer
+		%p.likes 16 likes
+		%p
+			=post.caption
+		%p tags: #tag, #something
+		=render post.comments
+		%hr/
+		.form-inline
+			.input-group-addon
+				%a.fa.fa-heart-o{:href => "#", 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like"}
+			=simple_form_for([post, post.comments.build]) do |f|
+				=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false

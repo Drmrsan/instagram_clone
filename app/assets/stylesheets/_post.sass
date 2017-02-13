@@ -28,19 +28,32 @@
 			color: #ccc
 	.card-footer
 		background: white
+		p.likes
+			font-weight: bold
+			font-size: .8em
 
-form.form-inline
-	input.form-control.add-comment
+.form-inline
+	input.form-control
 		border: none
 		width: 90%
+	::-webkit-input-placeholder
+		font-size: 14px!important
+		color: #cfcfcf
+	:-moz-placeholder
+		font-size: 14px!important
+		color: #cfcfcf
 	.input-group-addon
 		background: none
 		border: none
 		a
 			font-size: 1.5em
+			color: #f07499
 			&:hover
 				text-decoration: none
 
-
-
-
+p
+	font-size: .8em
+	a.comment-username
+		font:
+			weight: bold
+		color: black
