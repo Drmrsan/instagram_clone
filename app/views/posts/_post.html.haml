@@ -1,7 +1,8 @@
 .card.post-card
 	.card-header
 		%span.post-username
-			=post.user.username
+			=image_tag post.user.avatar.url(:thumb)
+			=link_to post.user.username, user_path(post.user)
 		%span.post-timestamp
 			.small.mute created #{time_ago_in_words(post.created_at)} ago
 	=image_tag(post.image.url, class:"img-fluid") if post.image?
@@ -15,5 +16,5 @@
 		.form-inline
 			.input-group-addon
 				%a.fa.fa-heart-o{:href => "#", 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like"}
-			=simple_form_for([post, post.comments.build]) do |f|
+			=simple_form_for([post, post.comments.build], remote: true) do |f|
 				=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false

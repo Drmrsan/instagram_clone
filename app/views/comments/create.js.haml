@@ -1,0 +1,6 @@
+$("#comments").append("<%= @comment.user.username %>: <%= @comment.content %>");
+ 
+$("#comments h4").html(""); 
+ 
+# replace comment form so user can only comment once (if desirable)
+$(".comment_form").html("<h1>You have commented on this post</h1>");
