@@ -1,5 +1,10 @@
 class User < ApplicationRecord
-	has_many :posts
+	acts_as_voter
+	
+	extend FriendlyId
+  friendly_id :username, use: :slugged
+
+	has_many :posts, dependent: :destroy
 	has_many :comments
 	mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:

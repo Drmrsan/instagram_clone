@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
 	
 	resources :posts do
+		member do
+			put "like", to: "posts#upvote"
+		end
 		resources :comments, only:[:create]
 	end
 

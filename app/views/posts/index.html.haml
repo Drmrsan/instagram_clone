@@ -2,10 +2,11 @@
 
 	.row
 		.col-md-6.offset-md-3
-			-# .card.card-outline-secondary.mb-3.text-center
-			-# 	.card-block.new-post
-			-# 		%a{:href => "#"}
-			-# 			%span+
-			-# 			%p Add post
+			-if !current_user.avatar?
+				.card.card-outline-secondary.mb-3.text-center
+					.card-block.new-post
+						=link_to edit_user_registration_path(@user) do
+							%span+
+							%p Add profile image
 			
 			=render @posts

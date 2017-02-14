@@ -1,4 +1,5 @@
 =simple_form_for(@post, html:{multipart:true}) do |f|
+	=render 'layouts/error_messages', obj:@post
 	=f.input :caption, placeholder:"Add caption...", class:"form-control"
 	=f.label :image, label:"Upload image"
 	=f.file_field :image, class:"form-control"

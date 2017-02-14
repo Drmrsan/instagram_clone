@@ -8,10 +8,10 @@ class CommentsController < ApplicationController
 
 			if @comment.save
 				format.html { redirect_to root_path }
-				format.js   {}
+				format.js
 			else
 				format.html { redirect_to root_path }
-				format.js   {}
+				format.js
 			end
 		end
 	end

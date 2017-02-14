@@ -1,20 +1,23 @@
 .card.post-card
 	.card-header
 		%span.post-username
-			=image_tag post.user.avatar.url(:thumb)
+			=image_tag post.user.avatar.url(:thumb) if post.user.avatar?
 			=link_to post.user.username, user_path(post.user)
 		%span.post-timestamp
 			.small.mute created #{time_ago_in_words(post.created_at)} ago
 	=image_tag(post.image.url, class:"img-fluid") if post.image?
 	.card-footer
-		%p.likes 16 likes
+		.fa.fa-heart-o
+		%span.likes #{post.get_likes.size} likes
 		%p
 			=post.caption
 		%p tags: #tag, #something
-		=render post.comments
+		#comments
+			=render post.comments
 		%hr/
 		.form-inline
 			.input-group-addon
-				%a.fa.fa-heart-o{:href => "#", 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like"}
+				=link_to like_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put do
+					.fa.fa-heart-o
 			=simple_form_for([post, post.comments.build], remote: true) do |f|
-				=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false
+				=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false, required:true

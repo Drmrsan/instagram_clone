@@ -1,9 +1,10 @@
 .container
 	.row.user-details
 		.col-md-6.text-center
-			=image_tag @user.avatar.url(:avatar)
+			=image_tag @user.avatar.url(:avatar) if @user.avatar?
 		.col-md-6.text-left
 			%h2 #{@user.username}
+
 	.row
 		-@user.posts.each do |post|
 			.col-md-4
