@@ -6,9 +6,9 @@ class ApplicationController < ActionController::Base
   protected
 
 	  def configure_permitted_parameters
-	    devise_parameter_sanitizer.permit(:sign_up, keys: [:username,:avatar, :avatar_cache, :remove_avatar, :remote_avatar_url])
-	    devise_parameter_sanitizer.permit(:sign_in, keys: [:username, :avatar, :avatar_cache, :remove_avatar, :remote_avatar_url])
-	    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :avatar, :avatar_cache, :remove_avatar, :remote_avatar_url])
+	    devise_parameter_sanitizer.permit(:sign_up, keys: [:username,:avatar, :avatar_cache, :remove_avatar, :remote_avatar_url, :bio])
+	    devise_parameter_sanitizer.permit(:sign_in, keys: [:username, :avatar, :avatar_cache, :remove_avatar, :remote_avatar_url, :bio])
+	    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :avatar, :avatar_cache, :remove_avatar, :remote_avatar_url, :bio])
 	  end
 
 end

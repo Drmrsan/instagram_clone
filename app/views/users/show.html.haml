@@ -1,11 +1,38 @@
 .container
 	.row.user-details
-		.col-md-6.text-center
+		.col-md-4.text-center
 			=image_tag @user.avatar.url(:avatar) if @user.avatar?
-		.col-md-6.text-left
-			%h2 #{@user.username}
+		.col-md-8.text-left
+			.header-details
+				%h2 #{@user.username}
+				=link_to "Edit Profile", edit_user_registration_path, class:"btn btn-secondary" if user_signed_in? && current_user.id == @user.id
+			.featured-details
+				%p 0 posts
+				%p 12 followers
+			%p
+				=@user.bio if @user.bio?
 
 	.row
-		-@user.posts.each do |post|
-			.col-md-4
-				=image_tag post.image, class:"img-fluid"
+		.card-columns
+			-@user.posts.each do |post|
+				.card
+					%a{:href => "", "data-target" => "#imageModal_#{post.id}", "data-toggle" => "modal"}
+						=image_tag post.image, class:"card-img-top img-fluid"
+
+					.modal.fade{id: "imageModal_#{post.id}", "aria-hidden" => "true", "aria-labelledby" => "imageModal_#{post.id}", :role => "dialog", :tabindex => "-1"}
+						.modal-dialog
+							.modal-content
+								.modal-body
+									=image_tag(post.image, class:"img-fluid")
+								.modal-footer
+									%p
+										=post.caption
+								.comments.user-show-page-modal
+									=render post.comments
+								%hr/
+								.form-inline
+									.input-group-addon
+										=link_to like_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put do
+											.fa.fa-heart-o
+									=simple_form_for([post, post.comments.build], remote: true) do |f|
+										=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false, required:true
