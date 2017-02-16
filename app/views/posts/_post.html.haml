@@ -9,11 +9,16 @@
 	.card-footer
 		.fa.fa-heart-o
 		%span.likes #{post.get_likes.size} likes
+		- if user_signed_in? && current_user.id == post.user.id 
+			%span.edit-post
+				=link_to edit_post_path(post) do
+					.fa.fa-edit
 		%p
 			=post.caption
-		%p tags: #tag, #something
-		.comments
+		-# %p tags: #tag, #something
+		%div{class:"comments_#{post.id}"}
 			=render post.comments
+	
 		%hr/
 		.form-inline
 			.input-group-addon

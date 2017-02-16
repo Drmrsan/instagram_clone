@@ -1,2 +1,4 @@
-$('.comments').append("#{ j render(@comment) }");
-$('#comment_content').val('');
+$('div.comments_#{@post.id}').append("#{ j render(@comment) }");
+$('.comments.user-show-page-modal').append("#{ j render(@comment) }");
+$('#comment_content, .comments.user-show-page-modal #comment_content').val('');
+

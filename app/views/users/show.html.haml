@@ -25,10 +25,13 @@
 								.modal-body
 									=image_tag(post.image, class:"img-fluid")
 								.modal-footer
+									.fa.fa-heart-o
+									%span.likes #{post.get_likes.size} likes
+								.modal-footer
 									%p
 										=post.caption
 								.comments.user-show-page-modal
-									=render post.comments
+									=render post.comments(post)
 								%hr/
 								.form-inline
 									.input-group-addon
