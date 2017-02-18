@@ -13,13 +13,13 @@
 					%input.form-control.mr-sm-2{:placeholder => "Search", :type => "text"}/
 
 				%ul.navbar-nav
-					%li.nav-item
-						%a.nav-link{:href => "#"}
-							%i.fa.fa-compass
-							%span.sr-only (current)
-					%li.nav-item
-						=link_to "#", class:"nav-link" do
-							%i.fa.fa-heart-o
+					-# %li.nav-item
+					-# 	%a.nav-link{:href => "#"}
+					-# 		%i.fa.fa-compass
+					-# 		%span.sr-only (current)
+					-# %li.nav-item
+					-# 	=link_to "#", class:"nav-link" do
+					-# 		%i.fa.fa-heart-o
 					%li.nav-item
 						=link_to user_path(current_user), class:"nav-link" do
 							%i.fa.fa-user-o

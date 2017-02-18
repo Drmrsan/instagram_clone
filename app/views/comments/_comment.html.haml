@@ -1,3 +1,6 @@
-%p#comments
+%p{ class:"comments_#{comment.id} comments"}
 	=link_to comment.user.username, "#", class:"comment-username"
 	%i #{comment.content}
+	-if comment.user == current_user
+		=link_to post_comment_path(comment.post, comment), method: :delete, remote: true do
+			%span.fa.fa-close

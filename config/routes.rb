@@ -7,8 +7,9 @@ Rails.application.routes.draw do
 	resources :posts do
 		member do
 			put "like", to: "posts#upvote"
+			put "unlike", to: "posts#downvote"
 		end
-		resources :comments, only:[:create]
+		resources :comments, only:[:create, :destroy]
 	end
 
 	root "pages#index"

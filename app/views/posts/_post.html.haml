@@ -8,11 +8,13 @@
 	=image_tag(post.image.url, class:"img-fluid") if post.image?
 	.card-footer
 		.fa.fa-heart-o
-		%span.likes #{post.get_likes.size} likes
+		%span.likes #{post.get_upvotes.size} likes
 		- if user_signed_in? && current_user.id == post.user.id 
 			%span.edit-post
 				=link_to edit_post_path(post) do
 					.fa.fa-edit
+				=link_to post_path(post), method: :delete, data:{confirm:"Are you sure?"} do
+					.fa.fa-close
 		%p
 			=post.caption
 		-# %p tags: #tag, #something
@@ -22,7 +24,12 @@
 		%hr/
 		.form-inline
 			.input-group-addon
-				=link_to like_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put do
-					.fa.fa-heart-o
+				-if current_user.voted_up_on? post
+					=link_to unlike_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put, remote: true do
+						.fa.fa-heart-o
+				-else
+					=link_to like_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put, remote: true do
+						.fa.fa-heart-o
+					
 			=simple_form_for([post, post.comments.build], remote: true) do |f|
 				=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false, required:true

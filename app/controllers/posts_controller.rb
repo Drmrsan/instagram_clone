@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	before_filter :authenticate_user!
-	before_action :set_post, only:[:show, :upvote]
+	before_action :set_post, only:[:show, :upvote, :downvote, :edit, :update, :destroy]
 
 	def index
 		@posts = Post.all.order("created_at DESC")
@@ -23,9 +23,36 @@ class PostsController < ApplicationController
 	def show
 	end
 
+	def edit
+	end
+
+	def update
+		if @post.update(post_params)
+			redirect_to root_path
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+		@post.delete
+		redirect_to root_path
+	end
+
 	def upvote
-		@post.liked_by current_user
-		redirect_to :back
+		@post.upvote_by current_user
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.js
+		end
+	end
+
+	def downvote
+		@post.downvote_by current_user
+		respond_to do |format|
+			format.html { redirect_to :back }
+			format.js
+		end
 	end
 
 	private

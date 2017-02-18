@@ -35,7 +35,11 @@
 								%hr/
 								.form-inline
 									.input-group-addon
-										=link_to like_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put do
-											.fa.fa-heart-o
+										-if current_user.voted_up_on? post
+											=link_to unlike_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put do
+												.fa.fa-heart-o
+										-else
+											=link_to like_post_path(post), 'data-toggle' => "tooltip", 'data-placement' => "top", 'title' => "Click to like", method: :put do
+												.fa.fa-heart-o
 									=simple_form_for([post, post.comments.build], remote: true) do |f|
 										=f.input :content, class:"form-control add-comment", placeholder:"Add a comment...", label:false, required:true
