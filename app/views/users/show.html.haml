@@ -6,9 +6,10 @@
 			.header-details
 				%h2 #{@user.username}
 				=link_to "Edit Profile", edit_user_registration_path, class:"btn btn-secondary" if user_signed_in? && current_user.id == @user.id
+			%br/
 			.featured-details
-				%p 0 posts
-				%p 12 followers
+				%span.badge.badge-info #{@user.posts.count} posts
+				-# %p 12 followers
 			%p
 				=@user.bio if @user.bio?
 
