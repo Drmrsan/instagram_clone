@@ -7,8 +7,9 @@
 			.small.mute created #{time_ago_in_words(post.created_at)} ago
 	=image_tag(post.image.url, class:"img-fluid") if post.image?
 	.card-footer
-		.fa.fa-heart-o
 		%span.likes #{post.get_upvotes.size} likes
+		%p.tag
+			=raw tag_links(post.all_tags)
 		- if user_signed_in? && current_user.id == post.user.id 
 			%span.edit-post
 				=link_to edit_post_path(post) do

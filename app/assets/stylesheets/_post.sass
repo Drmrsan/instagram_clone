@@ -31,13 +31,13 @@
 			float: left
 			a
 				font-weight: bold
-				color: black
+				color: #025aa5
 				font-size: .9em
 				&:hover
 					text-decoration: none
 		span.post-timestamp
 			float: right
-			color: #ccc
+			color: #8d8d8d
 	.card-footer
 		background: white
 		span.likes
@@ -63,7 +63,6 @@
 		background: none
 		border: none
 		a
-			font-size: 1.5em
 			color: #f07499
 			&:hover
 				text-decoration: none
@@ -103,9 +102,12 @@ p
 
 p.comments
 	transition: opacity ease-in-out .3s
+	margin-bottom: 5px
 	.fa.fa-close
 		opacity: 0
 	&:hover
 		.fa.fa-close
 			transition: opacity ease-in-out .3s
 			opacity: 1
+			color: grey
+			float: right

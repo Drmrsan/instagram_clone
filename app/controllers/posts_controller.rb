@@ -3,7 +3,11 @@ class PostsController < ApplicationController
 	before_action :set_post, only:[:show, :upvote, :downvote, :edit, :update, :destroy]
 
 	def index
-		@posts = Post.all.order("created_at DESC")
+		if params[:tag]
+    	@posts = Post.tagged_with(params[:tag])
+  	else
+			@posts = Post.all.order("created_at DESC")
+		end
 	end
 
 	def new
@@ -28,6 +32,7 @@ class PostsController < ApplicationController
 
 	def update
 		if @post.update(post_params)
+			flash[:notice] = "Post updated!"
 			redirect_to root_path
 		else
 			render 'edit'
@@ -57,7 +62,7 @@ class PostsController < ApplicationController
 
 	private
 		def post_params
-			params.require(:post).permit(:caption, :image, :remote_image_url)
+			params.require(:post).permit(:caption, :image, :remote_image_url, :all_tags)
 		end
 
 		def set_post

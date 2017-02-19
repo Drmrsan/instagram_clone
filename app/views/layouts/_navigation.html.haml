@@ -10,7 +10,8 @@
 			#navbarTogglerDemo02.collapse.navbar-collapse
 
 				%form.form-inline.form-center
-					%input.form-control.mr-sm-2{:placeholder => "Search", :type => "text"}/
+					-# %input.form-control.mr-sm-2{:placeholder => "Search", :type => "text"}/
+					=render "layouts/search_form"
 
 				%ul.navbar-nav
 					-# %li.nav-item

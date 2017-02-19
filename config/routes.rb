@@ -4,6 +4,10 @@ Rails.application.routes.draw do
   # users show page
   resources :users, only: [:index, :show]
 	
+	#tags
+	get 'tags/:tag', to: 'posts#index', as: 'tag'
+	get 'search/:tag', to: 'posts#index', as: "search"
+	
 	resources :posts do
 		member do
 			put "like", to: "posts#upvote"
